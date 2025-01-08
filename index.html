@@ -1,7 +1,7 @@
-<html><head><base href="." />
+<html><head><base href=".">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema de Reservas de Cabañas</title>
+<title>Sistema de Reservas de Caba&#xf1;as</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <style>
@@ -182,8 +182,8 @@ body {
 }
 
 .table-hover tbody tr:hover {
-    background-color: #f8f9fa;
-    transform: scale(1.01);
+    background-color: rgba(13, 110, 253, 0.05);
+    cursor: pointer;
 }
 
 .cabin-status {
@@ -254,36 +254,39 @@ body {
         padding: 20px;
         display: flex;
         flex-direction: column;
+        position: relative;
         justify-content: center;
         align-items: center;
-        position: relative;
     }
     
     .cabin-number {
-        font-size: 24px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 28px;
         font-weight: bold;
-        margin-bottom: 10px;
+        color: #666;
     }
     
     .location-text {
-        font-size: 18px;
+        font-size: 28px; 
         color: #666;
-        margin-bottom: 15px;
+        margin-bottom: 25px; 
     }
     
     .guest-name {
-        font-size: 36px; /* Increased from previous size */
+        font-size: 72px; 
         font-weight: bold;
         text-align: center;
-        margin: 15px 0;
+        margin: 25px 0; 
+        line-height: 1.2;
     }
     
     .room-number {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 14px;
-        color: #666;
+        font-size: 72px; 
+        font-weight: bold;
+        margin-bottom: 25px;
+        text-align: center;
     }
     
     @page {
@@ -291,14 +294,81 @@ body {
         margin: 0.5cm;
     }
 }
+
+/* Add to existing styles */
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-body label.fw-bold {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: #0d6efd;
+    margin-bottom: 0.5rem;
+}
+
+.modal-body div:not(.mb-3) {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    border: 1px solid #e9ecef;
+}
+
+#viewReservationModal .modal-content {
+    border: none;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+}
+
+#viewReservationModal .modal-header {
+    padding: 1.5rem 2rem;
+}
+
+#viewReservationModal .modal-title {
+    font-size: 1.4rem;
+}
+
+#viewReservationModal .mb-3 {
+    margin-bottom: 1.5rem !important;
+}
 </style>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, set, get, remove, query, orderByChild } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDUirwoSQgvcMZn7uLjKMAxlTA15Jkl2BM",
+    authDomain: "ismakun-bf0fa.firebaseapp.com", 
+    databaseURL: "https://ismakun-bf0fa-default-rtdb.firebaseio.com",
+    projectId: "ismakun-bf0fa",
+    storageBucket: "ismakun-bf0fa.firebasestorage.app",
+    messagingSenderId: "1028877703945",
+    appId: "1:1028877703945:web:331de48acbcdf2234a51d8"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // Make Firebase functions globally available
+  window.db = db;
+  window.dbRef = ref;
+  window.dbSet = set;
+  window.dbGet = get;
+  window.dbRemove = remove;
+  window.dbQuery = query;
+  window.dbOrderByChild = orderByChild;
+</script>
 </head>
 <body>
 
 <div class="container mt-4">
     <div class="page-header">
         <div class="d-flex justify-content-between align-items-center">
-            <h2><i class="fas fa-hotel me-2"></i>Sistema de Reservas de Cabañas</h2>
+            <h2><i class="fas fa-hotel me-2"></i>Sistema de Reservas de Caba&#xf1;as</h2>
             <div class="d-flex gap-3 align-items-center">
                 <div class="search-box">
                     <i class="fas fa-search me-2"></i>
@@ -315,10 +385,10 @@ body {
     </div>
     
     <div class="location-info">
-        <span class="badge badge-cabin badge-wonderpool"><i class="fas fa-swimming-pool me-2"></i>Cabañas 1-20: Wonderpool</span>
-        <span class="badge badge-cabin badge-piscina"><i class="fas fa-water me-2"></i>Cabañas 21-26: Piscina Principal</span>
-        <span class="badge badge-cabin badge-playa"><i class="fas fa-umbrella-beach me-2"></i>Cabañas 27-31: Playa Regular</span>
-        <span class="badge badge-cabin badge-vip"><i class="fas fa-star me-2"></i>Cabañas 32-38: Playa VIP</span>
+        <span class="badge badge-cabin badge-wonderpool"><i class="fas fa-swimming-pool me-2"></i>Caba&#xf1;as 1-20: Wonderpool</span>
+        <span class="badge badge-cabin badge-piscina"><i class="fas fa-water me-2"></i>Caba&#xf1;as 21-26: Piscina Principal</span>
+        <span class="badge badge-cabin badge-playa"><i class="fas fa-umbrella-beach me-2"></i>Caba&#xf1;as 27-31: Playa Regular</span>
+        <span class="badge badge-cabin badge-vip"><i class="fas fa-star me-2"></i>Caba&#xf1;as 32-38: Playa VIP</span>
     </div>
 
     <div class="table-responsive">
@@ -326,9 +396,9 @@ body {
             <thead>
                 <tr>
                     <th><i class="far fa-calendar me-2"></i>Fecha</th>
-                    <th><i class="fas fa-door-closed me-2"></i>Habitación</th>
-                    <th><i class="fas fa-user me-2"></i>Huésped</th>
-                    <th><i class="fas fa-home me-2"></i>Cabaña</th>
+                    <th><i class="fas fa-door-closed me-2"></i>Habitaci&#xf3;n</th>
+                    <th><i class="fas fa-user me-2"></i>Hu&#xe9;sped</th>
+                    <th><i class="fas fa-home me-2"></i>Caba&#xf1;a</th>
                     <th><i class="fas fa-user-tie me-2"></i>Vendedor</th>
                     <th><i class="fas fa-comments me-2"></i>Comentarios</th>
                     <th><i class="fas fa-cog me-2"></i>Acciones</th>
@@ -363,17 +433,17 @@ body {
                         <input type="date" class="form-control" id="reservationDate" onchange="updateAvailableCabins()" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label"><i class="fas fa-door-closed me-2"></i>Número de Habitación</label>
+                        <label class="form-label"><i class="fas fa-door-closed me-2"></i>N&#xfa;mero de Habitaci&#xf3;n</label>
                         <input type="number" class="form-control" id="roomNumber" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label"><i class="fas fa-user me-2"></i>Nombre del Huésped</label>
+                        <label class="form-label"><i class="fas fa-user me-2"></i>Nombre del Hu&#xe9;sped</label>
                         <input type="text" class="form-control" id="guestName" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label"><i class="fas fa-home me-2"></i>Número de Cabaña</label>
+                        <label class="form-label"><i class="fas fa-home me-2"></i>N&#xfa;mero de Caba&#xf1;a</label>
                         <select class="form-select" id="cabinNumber" required>
-                            <option value="">Seleccionar cabaña</option>
+                            <option value>Seleccionar caba&#xf1;a</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -442,120 +512,184 @@ body {
     </div>
 </div>
 
+<!-- Modal para ver detalles de la reserva -->
+<div class="modal fade" id="viewReservationModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-info-circle me-2"></i>Detalles de la Reserva</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="fw-bold"><i class="far fa-calendar me-2"></i>Fecha de Reserva</label>
+                    <div id="viewReservationDate"></div>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold"><i class="fas fa-door-closed me-2"></i>N&#xfa;mero de Habitaci&#xf3;n</label>
+                    <div id="viewRoomNumber"></div>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold"><i class="fas fa-user me-2"></i>Nombre del Hu&#xe9;sped</label>
+                    <div id="viewGuestName"></div>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold"><i class="fas fa-home me-2"></i>N&#xfa;mero de Caba&#xf1;a</label>
+                    <div id="viewCabinNumber"></div>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold"><i class="fas fa-user-tie me-2"></i>Vendedor</label>
+                    <div id="viewSeller"></div>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold"><i class="fas fa-comments me-2"></i>Comentarios</label>
+                    <div id="viewComments"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-// El resto del código JavaScript permanece igual que en la versión anterior
-let reservations = [];
+<script>let reservations = [];
 const modal = new bootstrap.Modal(document.getElementById('reservationModal'));
 const consultationModal = new bootstrap.Modal(document.getElementById('consultationModal'));
-
+const viewReservationModal = new bootstrap.Modal(document.getElementById('viewReservationModal'));
+async function saveReservationToDb(reservation) {
+  try {
+    await dbSet(dbRef(db, `reservations/${reservation.id}`), reservation);
+    return true;
+  } catch (error) {
+    console.error("Error saving reservation:", error);
+    return false;
+  }
+}
+async function loadReservationsFromDb() {
+  try {
+    const snapshot = await dbGet(dbRef(db, 'reservations'));
+    if (snapshot.exists()) {
+      reservations = Object.values(snapshot.val());
+      updateReservationsList();
+    }
+  } catch (error) {
+    console.error("Error loading reservations:", error);
+  }
+}
+async function deleteReservationFromDb(id) {
+  try {
+    await dbRemove(dbRef(db, `reservations/${id}`));
+    return true;
+  } catch (error) {
+    console.error("Error deleting reservation:", error);
+    return false;
+  }
+}
 function getCabinLocation(cabinNumber) {
-    if (cabinNumber >= 1 && cabinNumber <= 20) return 'wonderpool';
-    if (cabinNumber >= 21 && cabinNumber <= 26) return 'piscina';
-    if (cabinNumber >= 27 && cabinNumber <= 31) return 'playa';
-    if (cabinNumber >= 32 && cabinNumber <= 38) return 'vip';
-    return '';
+  if (cabinNumber >= 1 && cabinNumber <= 20) return 'wonderpool';
+  if (cabinNumber >= 21 && cabinNumber <= 26) return 'piscina';
+  if (cabinNumber >= 27 && cabinNumber <= 31) return 'playa';
+  if (cabinNumber >= 32 && cabinNumber <= 38) return 'vip';
+  return '';
 }
-
 function updateAvailableCabins() {
-    const selectedDate = document.getElementById('reservationDate').value;
-    const reservedCabins = reservations
-        .filter(r => r.reservationDate === selectedDate)
-        .map(r => r.cabinNumber);
-
-    const select = document.getElementById('cabinNumber');
-    select.innerHTML = '<option value="">Seleccionar cabaña</option>';
-    
-    for(let i = 1; i <= 38; i++) {
-        if (!reservedCabins.includes(i.toString())) {
-            const location = getCabinLocation(i);
-            let locationText = '';
-            switch(location) {
-                case 'wonderpool': locationText = '(Wonderpool)'; break;
-                case 'piscina': locationText = '(Piscina Principal)'; break;
-                case 'playa': locationText = '(Playa Regular)'; break;
-                case 'vip': locationText = '(Playa VIP)'; break;
-            }
-            select.innerHTML += `<option value="${i}">Cabaña ${i} ${locationText}</option>`;
-        }
+  const selectedDate = document.getElementById('reservationDate').value;
+  const reservedCabins = reservations.filter(r => r.reservationDate === selectedDate).map(r => r.cabinNumber);
+  const select = document.getElementById('cabinNumber');
+  select.innerHTML = '<option value="">Seleccionar cabaña</option>';
+  for (let i = 1; i <= 38; i++) {
+    if (!reservedCabins.includes(i.toString())) {
+      const location = getCabinLocation(i);
+      let locationText = '';
+      switch (location) {
+        case 'wonderpool':
+          locationText = '(Wonderpool)';
+          break;
+        case 'piscina':
+          locationText = '(Piscina Principal)';
+          break;
+        case 'playa':
+          locationText = '(Playa Regular)';
+          break;
+        case 'vip':
+          locationText = '(Playa VIP)';
+          break;
+      }
+      select.innerHTML += `<option value="${i}">Cabaña ${i} ${locationText}</option>`;
     }
+  }
 }
-
 function openNewReservationModal() {
-    document.getElementById('reservationForm').reset();
-    updateAvailableCabins();
-    modal.show();
+  document.getElementById('reservationForm').reset();
+  updateAvailableCabins();
+  modal.show();
 }
-
-function saveReservation() {
-    const form = document.getElementById('reservationForm');
-    if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-    }
-
-    const selectedDate = document.getElementById('reservationDate').value;
-    // Crear una fecha con la zona horaria local
-    const date = new Date(selectedDate);
-    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-    
-    const reservation = {
-        id: Date.now(),
-        reservationDate: date.toISOString().split('T')[0], // Formato YYYY-MM-DD
-        roomNumber: document.getElementById('roomNumber').value,
-        guestName: document.getElementById('guestName').value,
-        cabinNumber: document.getElementById('cabinNumber').value,
-        seller: document.getElementById('seller').value,
-        comments: document.getElementById('comments').value
-    };
-
+async function saveReservation() {
+  const form = document.getElementById('reservationForm');
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+  const selectedDate = document.getElementById('reservationDate').value;
+  const date = new Date(selectedDate);
+  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  const reservation = {
+    id: Date.now(),
+    reservationDate: date.toISOString().split('T')[0],
+    roomNumber: document.getElementById('roomNumber').value,
+    guestName: document.getElementById('guestName').value,
+    cabinNumber: document.getElementById('cabinNumber').value,
+    seller: document.getElementById('seller').value,
+    comments: document.getElementById('comments').value
+  };
+  const saved = await saveReservationToDb(reservation);
+  if (saved) {
     reservations.push(reservation);
     updateReservationsList();
     modal.hide();
+  } else {
+    alert('Error al guardar la reserva. Por favor intente nuevamente.');
+  }
 }
-
-function deleteReservation(id) {
-    if (confirm('¿Está seguro de eliminar esta reserva?')) {
-        reservations = reservations.filter(r => r.id !== id);
-        updateReservationsList();
+async function deleteReservation(id) {
+  if (confirm('¿Está seguro de eliminar esta reserva?')) {
+    const deleted = await deleteReservationFromDb(id);
+    if (deleted) {
+      reservations = reservations.filter(r => r.id !== id);
+      updateReservationsList();
+    } else {
+      alert('Error al eliminar la reserva. Por favor intente nuevamente.');
     }
+  }
 }
-
 function filterReservations() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const filteredReservations = reservations.filter(reservation => 
-        reservation.guestName.toLowerCase().includes(searchTerm) ||
-        reservation.cabinNumber.toString().includes(searchTerm) ||
-        reservation.seller.toLowerCase().includes(searchTerm) ||
-        reservation.roomNumber.toString().includes(searchTerm)
-    );
-    updateReservationsList(filteredReservations);
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const filteredReservations = reservations.filter(reservation => reservation.guestName.toLowerCase().includes(searchTerm) || reservation.cabinNumber.toString().includes(searchTerm) || reservation.seller.toLowerCase().includes(searchTerm) || reservation.roomNumber.toString().includes(searchTerm));
+  updateReservationsList(filteredReservations);
 }
-
 function formatDate(dateString) {
-    const date = new Date(dateString);
-    // Ajustar la zona horaria local
-    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    return date.toLocaleDateString('es-ES', options);
+  const date = new Date(dateString);
+  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  const options = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  };
+  return date.toLocaleDateString('es-ES', options);
 }
-
 function updateReservationsList(reservationsToShow = reservations) {
-    const list = document.getElementById('reservationsList');
-    list.innerHTML = '';
-
-    // Sort reservations by date
-    const sortedReservations = [...reservationsToShow].sort((a, b) => {
-        // Convert dates to timestamps for comparison
-        const dateA = new Date(a.reservationDate).getTime();
-        const dateB = new Date(b.reservationDate).getTime();
-        return dateA - dateB;
-    });
-
-    sortedReservations.forEach(reservation => {
-        const cabinLocation = getCabinLocation(reservation.cabinNumber);
-        const row = document.createElement('tr');
-        row.innerHTML = `
+  const list = document.getElementById('reservationsList');
+  list.innerHTML = '';
+  const sortedReservations = [...reservationsToShow].sort((a, b) => {
+    const dateA = new Date(a.reservationDate).getTime();
+    const dateB = new Date(b.reservationDate).getTime();
+    return dateA - dateB;
+  });
+  sortedReservations.forEach(reservation => {
+    const cabinLocation = getCabinLocation(reservation.cabinNumber);
+    const row = document.createElement('tr');
+    row.style.cursor = 'pointer';
+    row.onclick = () => viewReservation(reservation.id);
+    row.innerHTML = `
             <td>${formatDate(reservation.reservationDate)}</td>
             <td>${reservation.roomNumber}</td>
             <td>${reservation.guestName}</td>
@@ -563,144 +697,141 @@ function updateReservationsList(reservationsToShow = reservations) {
             <td>${reservation.seller}</td>
             <td>${reservation.comments || '-'}</td>
             <td class="action-buttons">
-                <button class="btn btn-outline-danger btn-sm" onclick="deleteReservation(${reservation.id})">
+                <button class="btn btn-outline-danger btn-sm" onclick="event.stopPropagation(); deleteReservation(${reservation.id})">
                     <i class="fas fa-trash"></i>
                 </button>
             </td>
         `;
-        list.appendChild(row);
-    });
+    list.appendChild(row);
+  });
 }
-
-// Consultar disponibilidad modal functions
 function openConsultationModal() {
-    document.getElementById('consultationDate').value = new Date().toISOString().split('T')[0];
-    updateConsultationView();
-    consultationModal.show();
+  document.getElementById('consultationDate').value = new Date().toISOString().split('T')[0];
+  updateConsultationView();
+  consultationModal.show();
 }
-
 function updateConsultationView() {
-    const selectedDate = document.getElementById('consultationDate').value;
-    const reservedCabins = reservations
-        .filter(r => r.reservationDate === selectedDate)
-        .map(r => parseInt(r.cabinNumber));
-
-    updateCabinSection('wonderpoolStatus', 1, 20, reservedCabins);
-    updateCabinSection('piscinaStatus', 21, 26, reservedCabins);
-    updateCabinSection('playaStatus', 27, 31, reservedCabins);
-    updateCabinSection('vipStatus', 32, 38, reservedCabins);
+  const selectedDate = document.getElementById('consultationDate').value;
+  const reservedCabins = reservations.filter(r => r.reservationDate === selectedDate).map(r => parseInt(r.cabinNumber));
+  updateCabinSection('wonderpoolStatus', 1, 20, reservedCabins);
+  updateCabinSection('piscinaStatus', 21, 26, reservedCabins);
+  updateCabinSection('playaStatus', 27, 31, reservedCabins);
+  updateCabinSection('vipStatus', 32, 38, reservedCabins);
 }
-
 function updateCabinSection(sectionId, start, end, reservedCabins) {
-    const section = document.getElementById(sectionId);
-    section.innerHTML = '';
-    
-    for(let i = start; i <= end; i++) {
-        const isOccupied = reservedCabins.includes(i);
-        const cabin = document.createElement('div');
-        cabin.className = `cabin-status ${isOccupied ? 'occupied' : 'available'}`;
-        cabin.innerHTML = i;
-        
-        if(isOccupied) {
-            const reservation = reservations.find(r => parseInt(r.cabinNumber) === i);
-            cabin.title = `Ocupada por: ${reservation.guestName}`;
-        } else {
-            cabin.title = 'Disponible';
-        }
-        
-        section.appendChild(cabin);
+  const section = document.getElementById(sectionId);
+  section.innerHTML = '';
+  for (let i = start; i <= end; i++) {
+    const isOccupied = reservedCabins.includes(i);
+    const cabin = document.createElement('div');
+    cabin.className = `cabin-status ${isOccupied ? 'occupied' : 'available'}`;
+    cabin.innerHTML = i;
+    if (isOccupied) {
+      const reservation = reservations.find(r => parseInt(r.cabinNumber) === i);
+      cabin.title = `Ocupada por: ${reservation.guestName}`;
+    } else {
+      cabin.title = 'Disponible';
     }
+    section.appendChild(cabin);
+  }
 }
-
-// Funciones para imprimir etiquetas de cabañas
 function printCabinLabels() {
-    const selectedDate = prompt("Ingrese la fecha para imprimir (YYYY-MM-DD):", new Date().toISOString().split('T')[0]);
-    if (!selectedDate) return;
-
-    const dateReservations = reservations.filter(r => r.reservationDate === selectedDate)
-        .sort((a, b) => parseInt(a.cabinNumber) - parseInt(b.cabinNumber));
-
-    if (dateReservations.length === 0) {
-        alert("No hay reservas para la fecha seleccionada");
-        return;
+  const selectedDate = prompt("Ingrese la fecha para imprimir (YYYY-MM-DD):", new Date().toISOString().split('T')[0]);
+  if (!selectedDate) return;
+  const dateReservations = reservations.filter(r => r.reservationDate === selectedDate).sort((a, b) => parseInt(a.cabinNumber) - parseInt(b.cabinNumber));
+  if (dateReservations.length === 0) {
+    alert("No hay reservas para la fecha seleccionada");
+    return;
+  }
+  const printArea = document.getElementById('printArea');
+  printArea.innerHTML = '';
+  printArea.style.display = 'block';
+  for (let i = 0; i < dateReservations.length; i += 2) {
+    const pageDiv = document.createElement('div');
+    pageDiv.className = 'print-page';
+    const cabin1 = createCabinLabel(dateReservations[i]);
+    pageDiv.appendChild(cabin1);
+    if (i + 1 < dateReservations.length) {
+      const cabin2 = createCabinLabel(dateReservations[i + 1]);
+      pageDiv.appendChild(cabin2);
     }
-
-    const printArea = document.getElementById('printArea');
-    printArea.innerHTML = '';
-    printArea.style.display = 'block';
-
-    // Crear etiquetas
-    for (let i = 0; i < dateReservations.length; i += 2) {
-        const pageDiv = document.createElement('div');
-        pageDiv.className = 'print-page';
-
-        // Primera cabaña en la página
-        const cabin1 = createCabinLabel(dateReservations[i]);
-        pageDiv.appendChild(cabin1);
-
-        // Segunda cabaña en la página (si existe)
-        if (i + 1 < dateReservations.length) {
-            const cabin2 = createCabinLabel(dateReservations[i + 1]);
-            pageDiv.appendChild(cabin2);
-        }
-
-        printArea.appendChild(pageDiv);
-    }
-
-    // Iniciar impresión
-    setTimeout(() => {
-        window.print();
-        printArea.style.display = 'none';
-    }, 100);
+    printArea.appendChild(pageDiv);
+  }
+  setTimeout(() => {
+    window.print();
+    printArea.style.display = 'none';
+  }, 100);
 }
-
 function createCabinLabel(reservation) {
-    const cabinDiv = document.createElement('div');
-    cabinDiv.className = 'cabin-label';
-    
-    const location = getCabinLocation(parseInt(reservation.cabinNumber));
-    let locationText = '';
-    switch(location) {
-        case 'wonderpool': locationText = 'Wonderpool'; break;
-        case 'piscina': locationText = 'Piscina Principal'; break;
-        case 'playa': locationText = 'Playa Regular'; break;
-        case 'vip': locationText = 'Playa VIP'; break;
-    }
-
-    cabinDiv.innerHTML = `
-        <div class="cabin-number">Cabaña ${reservation.cabinNumber}</div>
-        <div class="location-text">${locationText}</div>
-        <div class="guest-name">${reservation.guestName}</div>
-        <div class="room-number">Habitación ${reservation.roomNumber}</div>
+  const cabinDiv = document.createElement('div');
+  cabinDiv.className = 'cabin-label';
+  const location = getCabinLocation(parseInt(reservation.cabinNumber));
+  let locationText = '';
+  switch (location) {
+    case 'wonderpool':
+      locationText = 'Wonderpool';
+      break;
+    case 'piscina':
+      locationText = 'Piscina Principal';
+      break;
+    case 'playa':
+      locationText = 'Playa Regular';
+      break;
+    case 'vip':
+      locationText = 'Playa VIP';
+      break;
+  }
+  cabinDiv.innerHTML = `
+        <div class="cabin-number">Balibed ${reservation.cabinNumber}</div>
+        <div class="room-number" style="margin-top: auto;">Room ${reservation.roomNumber}</div>
+        <div class="guest-name" style="margin-bottom: auto;">${reservation.guestName}</div>
     `;
-
-    return cabinDiv;
+  return cabinDiv;
 }
-
-// Inicializar con algunas reservas de ejemplo
-reservations = [
-    {
-        id: 1,
-        reservationDate: "2024-02-01",
-        roomNumber: "101",
-        guestName: "Juan Pérez",
-        cabinNumber: "1",
-        seller: "Ana Vendedora",
-        comments: "Cliente VIP, solicita vista al lago"
-    },
-    {
-        id: 2,
-        reservationDate: "2024-02-10",
-        roomNumber: "204",
-        guestName: "María García",
-        cabinNumber: "25",
-        seller: "Carlos Ventas",
-        comments: "Área de piscina principal"
-    }
-];
-
-updateReservationsList();
-</script>
+function viewReservation(id) {
+  const reservation = reservations.find(r => r.id === id);
+  if (!reservation) return;
+  document.getElementById('viewReservationDate').textContent = formatDate(reservation.reservationDate);
+  document.getElementById('viewRoomNumber').textContent = reservation.roomNumber;
+  document.getElementById('viewGuestName').textContent = reservation.guestName;
+  const cabinLocation = getCabinLocation(reservation.cabinNumber);
+  let locationText = '';
+  switch (cabinLocation) {
+    case 'wonderpool':
+      locationText = ' (Wonderpool)';
+      break;
+    case 'piscina':
+      locationText = ' (Piscina Principal)';
+      break;
+    case 'playa':
+      locationText = ' (Playa Regular)';
+      break;
+    case 'vip':
+      locationText = ' (Playa VIP)';
+      break;
+  }
+  document.getElementById('viewCabinNumber').textContent = `Cabaña ${reservation.cabinNumber}${locationText}`;
+  document.getElementById('viewSeller').textContent = reservation.seller;
+  document.getElementById('viewComments').textContent = reservation.comments || '-';
+  viewReservationModal.show();
+}
+async function removeOldReservations() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const filteredReservations = reservations.filter(reservation => {
+    const reservationDate = new Date(reservation.reservationDate);
+    return reservationDate >= today;
+  });
+  const deletedReservations = reservations.filter(r => !filteredReservations.includes(r));
+  for (const reservation of deletedReservations) {
+    await deleteReservationFromDb(reservation.id);
+  }
+  reservations = filteredReservations;
+  updateReservationsList();
+}
+document.addEventListener('DOMContentLoaded', () => {
+  loadReservationsFromDb();
+});</script>
 
 </body>
 </html>
