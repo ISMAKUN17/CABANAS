@@ -725,12 +725,20 @@ function updateReservationsList(reservationsToShow = reservations) {
   const list = document.getElementById('reservationsList');
   list.innerHTML = '';
 
+  // Verificar el formato de las fechas
+  console.log("Antes de ordenar:", reservationsToShow.map(r => r.reservationDate));
+
   // Ordenar de más reciente a más antigua
   const sortedReservations = [...reservationsToShow].sort((a, b) => {
-    const dateA = new Date(a.reservationDate).getTime();
-    const dateB = new Date(b.reservationDate).getTime();
+    const dateA = new Date(a.reservationDate);
+    const dateB = new Date(b.reservationDate);
+
+    console.log(`Comparando: ${dateA} vs ${dateB}`); // Ver fechas antes de comparar
+
     return dateB - dateA; // Cambio de orden
   });
+
+  console.log("Después de ordenar:", sortedReservations.map(r => r.reservationDate));
 
   sortedReservations.forEach(reservation => {
     const cabinLocation = getCabinLocation(reservation.cabinNumber);
@@ -753,6 +761,7 @@ function updateReservationsList(reservationsToShow = reservations) {
     list.appendChild(row);
   });
 }
+
 
 function openConsultationModal() {
   document.getElementById('consultationDate').value = new Date().toISOString().split('T')[0];
